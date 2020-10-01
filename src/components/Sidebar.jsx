@@ -9,6 +9,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import Icon from '@material-ui/core/Icon';
+
 
 const drawerWidth = 240;
 
@@ -50,10 +52,10 @@ function Sidebar() {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            {['Directivos', 'Profesores', 'Alumnos'].map((text, index) => (
+            {[{name:"Directivos", icon:"people_alt"}, {name:"Profesores", icon:"emoji_people"}, {name:"Alumnos", icon:"face"}].map((text, index) => (
               <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemIcon><Icon>{text.icon}</Icon></ListItemIcon>
+                <ListItemText primary={text.name} />
               </ListItem>
             ))}
           </List>
