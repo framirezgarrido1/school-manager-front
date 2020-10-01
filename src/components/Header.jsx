@@ -6,8 +6,8 @@ import '../css/App.css';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton/IconButton';
-import { MenuIcon, AccountCircle } from '@material-ui/icons';
+import Avatar from '@material-ui/core/Avatar';
+import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,6 +20,17 @@ const useStyles = makeStyles((theme) => ({
     title: {
       flexGrow: 1,
     },
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+    },
+    orange: {
+      color: theme.palette.getContrastText(deepOrange[500]),
+      backgroundColor: deepOrange[800],
+    },
+    purple: {
+      color: theme.palette.getContrastText(deepPurple[700]),
+      backgroundColor: deepPurple[900],
+    }
   }));
 
 function Header() {
@@ -28,16 +39,12 @@ const classes = useStyles();
 
   return (
       <header>
-        <AppBar position="static">
+        <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h6" className={classes.title}>
-            News
+            Dashboard School Manager
           </Typography>
-          <AccountCircle />
-          <Button color="inherit">Login</Button>
+          <Avatar className={classes.purple}>F</Avatar>
         </Toolbar>
       </AppBar>
       </header>
