@@ -1,26 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { NavLink } from 'react-router-dom'
 import '../css/App.css';
 
 // Material UI Components
+import Icon from '@material-ui/core/Icon';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
+import clsx from 'clsx';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
     },
     menuButton: {
-      marginRight: theme.spacing(2),
+      marginRight: theme.spacing(0),
     },
     title: {
       flexGrow: 1,
     },
     appBar: {
-      zIndex: theme.zIndex.drawer + 1,
+      zIndex:9999,
     },
     orange: {
       color: theme.palette.getContrastText(deepOrange[500]),
@@ -29,24 +43,95 @@ const useStyles = makeStyles((theme) => ({
     purple: {
       color: theme.palette.getContrastText(deepPurple[700]),
       backgroundColor: deepPurple[900],
+    },
+    list: {
+      width: 250,
+    },
+    fullList: {
+      width: 'auto',
+    },
+    link:{
+      textDecoration: 'none',
+      color: theme.palette.text.primary
     }
   }));
 
-function Header() {
-    
+function Header(props) {
+
+  const [state, setState] = useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
+
+const menuItems = [
+  {name:'Home', rute:'/', icon:'home'},
+  {name:'Estudiantes', rute:'/students', icon:'school'},
+  {name:'Profesores', rute:'/teachers', icon:'emoji_people'},
+  {name:'Dirección', rute:'/directors', icon:'groups'}
+]
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+  
+  const list = (anchor) => (
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+      })}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {menuItems.map((text, index) => (
+          <NavLink to={text.rute} className={classes.link}>
+            <ListItem button key={text.name}>
+              <ListItemIcon><Icon>{text.icon}</Icon></ListItemIcon>
+              <ListItemText primary={text.name} ></ListItemText>
+            </ListItem>
+          </NavLink>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
+
 const classes = useStyles();
 
   return (
-      <header>
-        <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            School Manager
-          </Typography>
-          <Avatar className={classes.purple}>F</Avatar>
-        </Toolbar>
-      </AppBar>
-      </header>
+      <div>
+        <AppBar position="fixed" className="appBar">
+          <Toolbar>
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={toggleDrawer("left", true)}>
+            <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" className={classes.title}>
+              School Manager
+            </Typography>
+            <Button color="inherit">Login</Button>
+          </Toolbar>
+        </AppBar>
+        <Drawer anchor="left" open={state["left"]} onClose={toggleDrawer("left", false)}>
+          {list("left")}
+        </Drawer>
+      </div>
   );
 }
 
