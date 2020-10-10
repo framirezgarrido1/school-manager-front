@@ -7,13 +7,25 @@ import Container from '@material-ui/core/Container';
 
 function Content(props) {
   return (
-      <Container maxWidth="xl" className="page-content">
-        <Grid container>
-          <Grid item lg={12} md={12} xs={12}>
-            <h1>{props.name}</h1>
-          </Grid>
+    <div>
+    <div className="header-gray">
+    <Container maxWidth="lg">
+      <Grid container>
+        <Grid item lg={12} md={12} xs={12}>
+          <h2>{props.name}</h2>
         </Grid>
-      </Container>
+      </Grid>
+    </Container>
+    </div>
+    <Container maxWidth="lg" className="page-content">
+      <Grid container>
+        <Grid item lg={12} md={12} xs={12}>
+          <h1>Data</h1>
+        </Grid>
+        
+      </Grid>
+    </Container>
+  </div>
   );
 }
 

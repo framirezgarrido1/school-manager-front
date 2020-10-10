@@ -19,8 +19,6 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -68,9 +66,16 @@ function Header(props) {
 
 const menuItems = [
   {name:'Home', rute:'/', icon:'home'},
-  {name:'Estudiantes', rute:'/students', icon:'school'},
+  {name:'Estudiantes', rute:'/students', icon:'face'},
   {name:'Profesores', rute:'/teachers', icon:'emoji_people'},
   {name:'Dirección', rute:'/directors', icon:'groups'}
+]
+
+const menuModules = [
+  {name:'Notas', rute:'/', icon:'format_list_numbered'},
+  {name:'Asistencia', rute:'/students', icon:'fact_check'},
+  {name:'Planificaciones', rute:'/teachers', icon:'file_copy'},
+  {name:'Tareas', rute:'/directors', icon:'book'}
 ]
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -94,7 +99,7 @@ const menuItems = [
       <List>
         {menuItems.map((text, index) => (
           <NavLink to={text.rute} className={classes.link}>
-            <ListItem button key={text.name}>
+            <ListItem button key={index}>
               <ListItemIcon><Icon>{text.icon}</Icon></ListItemIcon>
               <ListItemText primary={text.name} ></ListItemText>
             </ListItem>
@@ -103,11 +108,13 @@ const menuItems = [
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
+        {menuModules.map((text, index) => (
+          <NavLink to={text.rute} className={classes.link}>
+            <ListItem button key={index}>
+              <ListItemIcon><Icon>{text.icon}</Icon></ListItemIcon>
+              <ListItemText primary={text.name} ></ListItemText>
+            </ListItem>
+          </NavLink>
         ))}
       </List>
     </div>
@@ -123,7 +130,7 @@ const classes = useStyles();
             <MenuIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              School Manager
+              Gestión de Escuelas
             </Typography>
             <Button color="inherit">Login</Button>
           </Toolbar>

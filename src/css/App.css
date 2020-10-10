@@ -7,8 +7,14 @@
   pointer-events: none;
 }
 
+.header-gray{
+  background-color: #F9F9F9;
+  min-height: 10rem;
+  padding-top: 5rem;
+}
+
 .page-content{
-  margin-top: 5rem;
+  margin-top: 1rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {

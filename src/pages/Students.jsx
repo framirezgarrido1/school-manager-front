@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/App.css';
 
  /* Components */
  import Header from '../components/Header'  
- import Content from '../components/Content';
+ import ContentData from '../components/ContentData';
 
 function Students() {
 
-  const [page] = useState("Estudiantes")
 
   return (
     <div>
-    <Header />
-    <Content name={page} />
-  </div>
+      <Header />
+      <ContentData/>
+    </div>
   );
 }
 
