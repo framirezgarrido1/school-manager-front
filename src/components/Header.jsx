@@ -66,14 +66,14 @@ function Header(props) {
 
 const menuItems = [
   {name:'Home', rute:'/', icon:'home'},
-  {name:'Estudiantes', rute:'/students', icon:'face'},
+  {name:'Estudiantes', rute:'/students/1', icon:'face'},
   {name:'Profesores', rute:'/teachers', icon:'emoji_people'},
   {name:'Dirección', rute:'/directors', icon:'groups'}
 ]
 
 const menuModules = [
   {name:'Notas', rute:'/', icon:'format_list_numbered'},
-  {name:'Asistencia', rute:'/students', icon:'fact_check'},
+  {name:'Asistencia', rute:'/students/1', icon:'fact_check'},
   {name:'Planificaciones', rute:'/teachers', icon:'file_copy'},
   {name:'Tareas', rute:'/directors', icon:'book'}
 ]

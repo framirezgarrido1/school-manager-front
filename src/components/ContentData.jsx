@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import '../css/App.css';
 import Data from './Data';
 
@@ -23,28 +24,26 @@ const useStyles = makeStyles((theme) => ({
     minWidth: '100%',
     marginBottom: theme.spacing(3),
   },
-
-  selects: {
-  },
+  h3:{
+    marginBottom: '2rem'
+  }
 }));
 
 
 function ContentData(props) {
 
-  const [page] = useState("Estudiantes")
+  let history = useHistory();
+
   const [students, setStudents] = useState([])
   const [isLoader, setIsLoader] = useState(false)
-  const [level, setLevel] = useState('');
+  const [level, setLevel] = useState(props.level)
+  const [nameLevel, setNameLevel] = useState('')
+  const [cantidadAlumnos, setCantidadAlumnos] = useState('')
+  const [levelRecive, setLevelRecive] = useState(props.level)
 
   useEffect(() => {
-    document.title = `${page}`;
-          
-  },[level, page]);
 
-
-  const findLevels = (level) => {
-      
-      const urlApi = 'http://localhost:3005/api/students/' + level;
+    const urlApi = 'http://192.168.0.4:3005/api/students/' + levelRecive;
 
       setIsLoader(true)
 
@@ -53,7 +52,18 @@ function ContentData(props) {
             .then(data => {
               setStudents(data)
               setIsLoader(false)
+              setCantidadAlumnos(data.length + ' Alumnos')
+              history.replace('/students/'+levelRecive)
+
             })
+            
+  }, [levelRecive, history]);
+
+
+  const findLevels = (levelSelect) => {
+    
+    setLevelRecive(levelSelect)
+
     }
 
   const classes = useStyles();
@@ -62,9 +72,46 @@ function ContentData(props) {
     setLevel(event.target.value);
     findLevels(event.target.value)
 
-  };
+    switch(event.target.value){
+      case "1":
+        setNameLevel("Primero Básico")
+        break;
+      
+      case "2":
+        setNameLevel("Segundo Básico")
+        break;
+      
+      case "3":
+        setNameLevel("Tercero Básico")
+        break;
+      
+      case "4":
+        setNameLevel("Cuarto Básico")
+        break;
+      
+      case "5":
+        setNameLevel("Quinto Básico")
+        break;
+      
+      case "6":
+        setNameLevel("Sexto Básico")
+        break;
+      
+      case "7":
+        setNameLevel("Séptimo Básico")
+        break;
+      
+      case "8":
+        setNameLevel("Octavo Básico")
+        break;
 
-  
+      default:
+        setNameLevel("Todos los niveles");
+        break;
+
+    }
+
+  };
 
   return (
     <div>
@@ -83,7 +130,6 @@ function ContentData(props) {
                 value={level}
                 onChange={levelChange}
                 label="Curso"
-                
               > 
                 <MenuItem value={'all'}>Todos los niveles</MenuItem>
                 <MenuItem value={'1'}>Primero Básico</MenuItem>
@@ -91,28 +137,31 @@ function ContentData(props) {
                 <MenuItem value={'3'}>Tercero Básico</MenuItem>
                 <MenuItem value={'4'}>Cuarto Básico</MenuItem>
                 <MenuItem value={'5'}>Quinto Básico</MenuItem>
-                <MenuItem value={'6'}>Cuarto Básico</MenuItem>
-                <MenuItem value={'7'}>Cuarto Básico</MenuItem>
-                <MenuItem value={'8'}>Cuarto Básico</MenuItem>
+                <MenuItem value={'6'}>Sexto Básico</MenuItem>
+                <MenuItem value={'7'}>Séptimo Básico</MenuItem>
+                <MenuItem value={'8'}>Octavo Básico</MenuItem>
               </Select>
             </FormControl>
           </Grid>
         </Grid>
       </Container>
       </div>
+      <div className="bar-progress">
+        {isLoader && 
+          <LinearProgress />
+        }
+      </div>
       <Container maxWidth="lg" className="page-content">
+        
         <Grid container>
           <Grid item lg={12} md={12} xs={12}>
-            <h1>{level}</h1>
+            <h1>{nameLevel}</h1>
+            <h3 className={classes.h3}>{cantidadAlumnos}</h3>
           </Grid>
           <Grid item lg={12} md={12} xs={12}>
-            
-            {isLoader && 
-              <LinearProgress></LinearProgress>
-            }
 
             {level &&
-              <Data data={students} level={level}/>
+              <Data data={students} />
             }
             
           </Grid>

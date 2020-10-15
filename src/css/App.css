@@ -13,9 +13,35 @@
   padding-top: 5rem;
 }
 
+.header-normal{
+  min-height: 10rem;
+  padding-top: 5rem;
+}
+
+.content-header-normal{
+  padding: 1rem 0;
+}
+
+.content-body-normal{
+  padding: 1rem 0 2rem 0;
+}
+
+.content-item-normal{
+  padding-bottom: 1rem;
+}
+
 .page-content{
   margin-top: 1rem;
 }
+
+.bar-progress {
+  height: 0.5rem;
+}
+
+.text-minuscula {
+  text-transform: lowercase;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
