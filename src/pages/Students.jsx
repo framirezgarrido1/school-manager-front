@@ -10,7 +10,6 @@ function Students(props) {
   const { match: { params } } = props;
   const [level] = useState(params.level)
 
-
   return (
     <div>
       <Header />

@@ -37,42 +37,13 @@ function ContentData(props) {
   const [students, setStudents] = useState([])
   const [isLoader, setIsLoader] = useState(false)
   const [level, setLevel] = useState(props.level)
-  const [nameLevel, setNameLevel] = useState('')
+  const [nameLevel, setNameLevel] = useState(props.level)
   const [cantidadAlumnos, setCantidadAlumnos] = useState('')
   const [levelRecive, setLevelRecive] = useState(props.level)
 
   useEffect(() => {
 
-    const urlApi = 'http://192.168.0.4:3005/api/students/' + levelRecive;
-
-      setIsLoader(true)
-
-      fetch(urlApi)
-            .then(response => response.json())
-            .then(data => {
-              setStudents(data)
-              setIsLoader(false)
-              setCantidadAlumnos(data.length + ' Alumnos')
-              history.replace('/students/'+levelRecive)
-
-            })
-            
-  }, [levelRecive, history]);
-
-
-  const findLevels = (levelSelect) => {
-    
-    setLevelRecive(levelSelect)
-
-    }
-
-  const classes = useStyles();
-
-  const levelChange = (event) => {
-    setLevel(event.target.value);
-    findLevels(event.target.value)
-
-    switch(event.target.value){
+    switch(levelRecive){
       case "1":
         setNameLevel("Primero Básico")
         break;
@@ -110,6 +81,35 @@ function ContentData(props) {
         break;
 
     }
+
+      const urlApi = 'http://localhost:3005/api/students/' + levelRecive;
+
+      setIsLoader(true)
+
+      fetch(urlApi)
+            .then(response => response.json())
+            .then(data => {
+              setStudents(data)
+              setIsLoader(false)
+              setCantidadAlumnos(data.length + ' Alumnos')
+              history.replace('/students/'+levelRecive)
+
+            })
+            
+  }, [levelRecive, history]);
+
+
+  const findLevels = (levelSelect) => {
+    
+    setLevelRecive(levelSelect)
+
+    }
+
+  const classes = useStyles();
+
+  const levelChange = (event) => {
+    setLevel(event.target.value);
+    findLevels(event.target.value)
 
   };
 

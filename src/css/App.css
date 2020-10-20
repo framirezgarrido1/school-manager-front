@@ -34,6 +34,27 @@
   margin-top: 1rem;
 }
 
+.content-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.content-center {
+  margin: 0.5rem 0;
+}
+
+.content-center h1 {
+  margin: 0;
+}
+
+.content-center a {
+  margin: 1rem 0;
+}
+
+
 .bar-progress {
   height: 0.5rem;
 }
@@ -42,6 +63,22 @@
   text-transform: lowercase;
 }
 
+.content-spinner{
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-back {
+  margin-bottom: 1rem !important;
+}
+
+.content-alerts {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

@@ -12,6 +12,10 @@ import Icon from '@material-ui/core/Icon';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import InfoIcon from '@material-ui/icons/Info';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,7 +43,9 @@ function Data(props) {
       setAnchorEl(null);
     };
 
+
     return (
+      
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -62,12 +68,19 @@ function Data(props) {
                 <TableCell>{row.apellidoPaterno}</TableCell>
                 <TableCell>{row.apellidoMaterno}</TableCell>
                 <TableCell>{row.run}-{row.digitoVer}</TableCell> 
-                <TableCell className="text-minuscula">{row.email}</TableCell>
-                <TableCell>{row.celular}</TableCell>
+                <TableCell className="text-minuscula">
+                  {row.email === undefined
+                  ? <Tooltip title="No existe información" placement="right"><InfoIcon color="secondary" /></Tooltip>
+                  : row.email}
+                </TableCell>
+                <TableCell>{row.celular === undefined
+                ? <Tooltip title="No existe información" placement="right"><InfoIcon color="secondary" /></Tooltip>
+                : '+56 ' + row.celular}
+                </TableCell>
                 <TableCell>
-                  <Button id={row._id} onClick={handleClick}>
+                  <IconButton id={row._id}  onClick={handleClick}>
                     <Icon>more_vert</Icon>
-                  </Button>
+                  </IconButton>
                 </TableCell>
               </TableRow>
             ))}
@@ -79,8 +92,7 @@ function Data(props) {
           open={Boolean(anchorEl)}
           onClose={handleClose}
           >
-            <NavLink to={'/student/' + idselect} className={classes.link} ><MenuItem onClick={handleClose}>Ver matricula</MenuItem></NavLink>
-            <MenuItem onClick={handleClose}>Editar datos</MenuItem>
+            <NavLink to={'/student/' + idselect} className={classes.link} ><MenuItem onClick={handleClose}>Editar</MenuItem></NavLink>
             <MenuItem onClick={handleClose}>Eliminar</MenuItem>
         </Menu>
         </Table>
