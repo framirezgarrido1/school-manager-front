@@ -87,7 +87,7 @@ function StudentData(props) {
     function loadData(){
 
         setIsLoader(true)
-        const urlApi = 'http://localhost:3005/api/students/only/' + idStudent;
+        const urlApi = 'http://104.131.113.47:3005/api/students/only/' + idStudent;
 
         fetch(urlApi)
             .then(response => response.json())
@@ -99,7 +99,7 @@ function StudentData(props) {
 
     function updateData(id) {
 
-        const urlApi = 'http://localhost:3005/api/update/' + id + '/' + idEdit + '/' + valueTextfield;
+        const urlApi = 'http://104.131.113.47:3005/api/update/' + id + '/' + idEdit + '/' + valueTextfield;
 
         fetch(urlApi, {
                 method: 'POST'

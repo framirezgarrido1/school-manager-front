@@ -82,7 +82,7 @@ function ContentData(props) {
 
     }
 
-      const urlApi = 'http://localhost:3005/api/students/' + levelRecive;
+      const urlApi = 'http://104.131.113.47:3005/api/students/' + levelRecive;
 
       setIsLoader(true)
 
