@@ -73,7 +73,6 @@ function StudentData(props) {
         setAlert(false);
       };
 
-
     useEffect(() => {
 
         loadData(); 
@@ -131,15 +130,16 @@ function StudentData(props) {
                         <Grid item lg={12} md={12} xs={12}>
                             <div className="content-header-normal">
                                 <Button variant="outlined" startIcon={<ArrowBackIcon />} className="btn-back" onClick={() => history.goBack()}>Atrás</Button>
-                                <h1>Información Matricula</h1>
+                                <h1>Datos personales</h1>
                                 <h2>Alumno {row.descGrado}</h2>
                             </div>
                         </Grid>
                     </Grid>
+                    <Divider />
                     </Container>
                     </div>
                     <Container maxWidth="lg">
-                    <div class="content-body-normal">
+                    <div className="content-body-normal">
                         <Grid container>
                             <Grid item lg={5} md={12} xs={12}>
                                 <p>Nombre completo</p>
@@ -173,7 +173,7 @@ function StudentData(props) {
                     </div>
                     <div className="content-alerts">
                         <Snackbar open={alert} autoHideDuration={3000} onClose={handleCloseAlert}>
-                            <Alert variant="filled" severity="success" in={alert}>{fieldEdit} se guardo correctamente</Alert>
+                            <Alert variant="filled" severity="success">{fieldEdit} se guardo correctamente</Alert>
                         </Snackbar>
                     </div>
                     

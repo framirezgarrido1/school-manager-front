@@ -3,16 +3,23 @@ import '../css/App.css';
 
  /* Components */
  import Header from '../components/Header'  
- import Content from '../components/Content';
+ import HomeData from '../components/HomeData';
 
 function Home() {
 
-  const [page] = useState("Home")
+  let schooldata = {
+    rol: 'Profesor',
+    username: 'Fernando Ramírez Garrido', 
+    schoolname: 'Escuela Particular Ejército de Salvación'
+  }
+
+  const [page] = useState("Gestion de escuelas")
+  const [schoolData] = useState(schooldata)
 
   return (
     <div>
     <Header />
-    <Content name={page} />
+    <HomeData name={page} schooldata={schoolData} />
   </div>
   );
 }

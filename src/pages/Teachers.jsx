@@ -3,7 +3,8 @@ import '../css/App.css';
 
  /* Components */
  import Header from '../components/Header'  
- import Content from '../components/Content';
+ import TeacherData from '../components/TeacherData';
+
 
 function Teachers() {
 
@@ -12,7 +13,7 @@ function Teachers() {
   return (
     <div>
     <Header />
-    <Content name={page} />
+    <TeacherData name={page} />
   </div>
   );
 }

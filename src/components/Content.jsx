@@ -12,7 +12,7 @@ function Content(props) {
     <Container maxWidth="lg">
       <Grid container>
         <Grid item lg={12} md={12} xs={12}>
-          <h2>{props.name}</h2>
+          <h3>{props.name}</h3>
         </Grid>
       </Grid>
     </Container>

@@ -66,7 +66,7 @@ function Header(props) {
 
 const menuItems = [
   {name:'Home', rute:'/', icon:'home'},
-  {name:'Estudiantes', rute:'/students/1', icon:'face'},
+  {name:'Alumnos', rute:'/students/1', icon:'face'},
   {name:'Profesores', rute:'/teachers', icon:'emoji_people'},
   {name:'Dirección', rute:'/directors', icon:'groups'}
 ]
